@@ -9,6 +9,6 @@ class Bot
     public void Start()
     {
         
-        ClinetT.Sta
+        
     }
 }
