@@ -2,6 +2,7 @@ using BotHelper.Model;
 using Rystem.OpenAi;
 using Rystem.OpenAi.Chat;
 
+namespace BotHelper.Model.Clients;
 class ChatGBTClient : IClient
 {
     
