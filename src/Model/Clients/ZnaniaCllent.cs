@@ -12,10 +12,11 @@ public class ZnaniaCllent : IClient
     
     
     public  string Name { get; } = "Znanija.com";
-    public WebDriver  Wd { get; set; }
+    public IWebDriver  Wd { get; set; }
     public int defultque = 1;
     
-    public ZnaniaCllent(WebDriver wd) => Wd = wd;
+    public ZnaniaCllent(IWebDriver wd) => Wd = wd;
+    
     
     public  Task<ClientResponse> GetAsync(string mess)
     {

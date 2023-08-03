@@ -6,10 +6,10 @@ namespace BotHelper.ClientManager;
 
 public class ClientManager
 {
-    private readonly IWebDriver _web;
+    public readonly IWebDriver web;
     public List<IClient> Clients { get; set; }
     public ClientManager(IWebDriver webDriver){
-        _web = webDriver;
+        web = webDriver;
         Clients = new();
     }
     public async Task<IEnumerable<ClientResponse>> SendAsync(string Message)
