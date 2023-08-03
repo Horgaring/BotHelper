@@ -1,13 +1,3 @@
-using Azure.Core.Pipeline;
-using BotHelper.ClientManager;
-using BotHelper.Model;
-using BotHelper.Model.Clients;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using Telegram.Bot;
-using Telegram.Bot.Polling;
-using Telegram.Bot.Types;
-
 public class Bot : IDisposable
 {
     public Telegram.Bot.TelegramBotClient ClinetT { get; set; }
