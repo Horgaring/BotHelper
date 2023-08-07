@@ -8,9 +8,9 @@ public class ClientResponse
     public override  string ToString()
     {
         StringBuilder sb = new();
-        foreach (var item in Content)
+        for  (int i = 1; i < Content.Length; i++)
         {
-            sb.Append(item + "\n");
+            sb.Append(Content[i] + "\n");
         }
         return string.Format("{0}\n\n{1}\n\n{2}",Name,Content[0],sb.ToString());
     }

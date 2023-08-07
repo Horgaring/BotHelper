@@ -27,7 +27,8 @@ public class Bot : IDisposable
     private async Task Update(ITelegramBotClient client, Update update, CancellationToken cancelltoken)
     {
         if(update.Message is Message mess){
-            if (mess.Text == null)
+            var time = mess.Date +new TimeSpan(0,4,0);
+            if (mess.Text == null ||  mess.Date +new TimeSpan(0,4,0)  <= DateTime.Now )
             {
                 return;
             }

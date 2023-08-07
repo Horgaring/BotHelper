@@ -22,13 +22,13 @@ public class ZnaniaCllent : IClient
     {
         Wd.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(2000);
         Wd.Navigate().GoToUrl(string.Format(format,mess));
-        if (Wd.FindElements(By.Id("didomi-notice-agree-button")) is ReadOnlyCollection<IWebElement> els)
-        {
-            els.FirstOrDefault()?.Click();
-        }
-        if (Wd.FindElement(By.ClassName("sg-dialog__close-button")) is IWebElement el)
+        if (Wd.TryFindElement(By.Id("didomi-notice-agree-button")) is IWebElement el)
         {
             el.Click();
+        }
+        if (Wd.TryFindElement(By.ClassName("sg-dialog__close-button")) is IWebElement ell)
+        {
+            ell.Click();
         }
         Wd.FindElements(By.ClassName("sg-text--link"))[6 + defultque].Click();
         return  Task.FromResult<ClientResponse>(Parse());

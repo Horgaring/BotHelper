@@ -23,18 +23,28 @@ public class MailRespClient :   IClient
         return await Parse();
         
     }
-    public async Task<ClientResponse> Parse()
+    private async Task<ClientResponse> Parse()
     {
+        string head;
         var response = await Client.GetAsync(UrlQuestion);
         var html = new HtmlDocument();
         html.LoadHtml(await response.Content.ReadAsStringAsync());
-        var nodes = html.DocumentNode.SelectNodes("//div[contains(@class, 'q--qcomment medium')]"); 
-        var nodes2 = html.DocumentNode.SelectNodes("//div[contains(@class, 'a--atext atext')]");
+        var nodes = html.DocumentNode.SelectNodes("//h1[contains(@class, 'z7Rgh')]"); 
+        var nodes2 = html.DocumentNode.SelectNodes("//p[contains(@class, 'Xn2FM')]");
         if (nodes.Count < 1 || nodes2.Count < 1)
         {
             throw new HtmlWebException("Not Fount");
         }
-        return new ClientResponse(Name,(nodes[0]).InnerText,(nodes2[0]).InnerText);
+        
+        if (nodes2.Count > 1)
+        {
+            head = nodes2[0].InnerText + "\n" + nodes2[1].InnerText;
+        }
+        else
+        {
+            head = nodes[0].InnerText;
+        }
+        return new ClientResponse(Name,head,nodes2[0].InnerText);
 
     }
     
