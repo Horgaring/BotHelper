@@ -11,7 +11,7 @@ public class Bot : IDisposable
         ClinetT = new(this.token);
         Wd = wd;
         Manager = new(Wd);
-        Manager.Clients.AddRange(new List<IClient>{new ZnaniaCllent(Manager.web),new MailRespClient(new())});
+        Manager.Clients.AddRange(new List<IClient>{new MailRespClient(new()) ,new ZnaniaCllent(Manager.web)});
     }
     public void Start()
     {
@@ -27,8 +27,8 @@ public class Bot : IDisposable
     private async Task Update(ITelegramBotClient client, Update update, CancellationToken cancelltoken)
     {
         if(update.Message is Message mess){
-            var time = mess.Date +new TimeSpan(0,4,0);
-            if (mess.Text == null ||  mess.Date +new TimeSpan(0,4,0)  <= DateTime.Now )
+            if (mess.Text == null 
+                || mess.Date +new TimeSpan(0,4,0)  <= DateTime.UtcNow )
             {
                 return;
             }

@@ -29,22 +29,25 @@ public class MailRespClient :   IClient
         var response = await Client.GetAsync(UrlQuestion);
         var html = new HtmlDocument();
         html.LoadHtml(await response.Content.ReadAsStringAsync());
-        var nodes = html.DocumentNode.SelectNodes("//h1[contains(@class, 'z7Rgh')]"); 
-        var nodes2 = html.DocumentNode.SelectNodes("//p[contains(@class, 'Xn2FM')]");
-        if (nodes.Count < 1 || nodes2.Count < 1)
+        
+        var titleq = html.DocumentNode.SelectSingleNode("//h1[contains(@class, 'q--qtext')]"); 
+        var bodyq = html.DocumentNode.SelectSingleNode("//div[contains(@class, 'q--qcomment medium')]");
+        var respq    = html.DocumentNode.SelectNodes("//div[contains(@class, 'a--atext atext')]");
+
+        if (titleq is null || respq is null)
         {
             throw new HtmlWebException("Not Fount");
         }
         
-        if (nodes2.Count > 1)
+        if (bodyq != null)
         {
-            head = nodes2[0].InnerText + "\n" + nodes2[1].InnerText;
+            head = titleq.InnerText + "\n" + bodyq.InnerText;
         }
         else
         {
-            head = nodes[0].InnerText;
+            head = titleq.InnerText;
         }
-        return new ClientResponse(Name,head,nodes2[0].InnerText);
+        return new ClientResponse(Name,head,respq[0].InnerText);
 
     }
     
